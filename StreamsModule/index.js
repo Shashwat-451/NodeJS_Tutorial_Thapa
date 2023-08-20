@@ -31,18 +31,21 @@ Alternatively, you can achieve the same result by
 server.on("request",(req,res)=>{
 
    const rstream=fs.createReadStream("input.txt");
-   rstream.on("data",(chunkdata)=>{
-    res.write(chunkdata);
-   })
+//    rstream.on("data",(chunkdata)=>{
+//     res.write(chunkdata);
+//    })
 
-   rstream.on("end",()=>{
-    res.end();
-   })
+//    rstream.on("end",()=>{
+//     res.end();
+//    })
 
-   rstream.on("error",(err)=>{
-    console.log(err);
-    res.end("File Not Found");
-   })
+//    rstream.on("error",(err)=>{
+//     console.log(err);
+//     res.end("File Not Found");
+//    })
+
+rstream.pipe(res);
+
 });
 
 
