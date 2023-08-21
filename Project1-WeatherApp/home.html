@@ -1,26 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather API</title>
     <link rel="stylesheet" href="./home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 800px;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 350px;
+    background-color: rgb(136, 210, 221);
+    height: 500px;
+}
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.fa-street-view{
+    animation: rotates 3s linear infinite alternate;
+}
+
+@keyframes rotates{
+    from{
+          transform: translateX(-0.5rem);
+    }
+    to{
+        transform: translateX(0.2rem);
+    }
+}
+
+#weathercon{
+
+    animation: fas-anime 3s linear infinite alternate;
+}
+
+@keyframes fas-anime{
+    from{
+        transform: scale(0.8);
+    }
+    to{
+         transform: scale(1.3);
+    }
+}
+        </style>
 </head>
+
 <body>
     <div class="box" style="margin: 0px;">
-        
+
         <!-- <div class="wave -one"></div>
         <div class="wave -two"></div>
         <div class="wave -three"></div> -->
 
-        <div id="weathercon" style="margin-bottom: 100px;" ><i class="fa-solid fa-sun fa-2xl" style="color: #f3ff52;font-size: 80px;"></i> </div>
+        <div id="weathercon" style="margin-bottom: 100px;"><i class="fa-solid fa-sun fa-2xl"
+                style="color: #f3ff52;font-size: 80px;"></i> </div>
 
-        <div class="info" style="background-color: rgb(199, 238, 245);-ms-flex-align: end; border-radius: 50px 50px 0 0;width: 100%;height: 60%;">
-            <h2 class="location" style="font-size: 40px;"><i class="fa-solid fa-street-view" style="color: #ffa50a;font-size: 60px;margin-right: 10px;"></i>Pune,India</h2>
+        <div class="info"
+            style="background-color: rgb(199, 238, 245);-ms-flex-align: end; border-radius: 50px 50px 0 0;width: 100%;height: 60%;">
+            <h2 class="location" style="font-size: 40px;"><i class="fa-solid fa-street-view"
+                    style="color: #ffa50a;font-size: 60px;margin-right: 10px;"></i>{%location%} {%country%}</h2>
             <p id="date"></p>
-            <h1 class="temp"></h1>
-            <h3 class="tempmin_max">Dummy</h3>
+            <h1 class="temp">{%tempval%}</h1>
+            <h3 class="tempmin_max">Min {%tempmin%} | Max {%tempmax%}</h3>
         </div>
 
     </div>
@@ -29,15 +88,24 @@
 
     <script>
 
-         const time=new Date();
-        //  const date=time.getDate();
-         const day=time.getDay();
-         const year=time.getFullYear();
-         const hour=time.getHours();
-         const min=time.getMinutes();
-         const sec=time.getSeconds();
-        const date=document.querySelector("date");
-        date.innerHTML=hour;
+        const date = (date = new Date()) => {
+            const day = date.getDate()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+            const time=date.getHours();
+            const min=date.getMinutes();
+            const monthh = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            let name = month[date.getMonth()];
+            const datee = document.getElementById("date");
+
+            const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let dayy = weekday[date.getDay()];
+
+            datee.innerHTML = ` ${dayy} |  ${dayy} ${day} , ${year} | ${time}:${min}`;
+        }
+         date()
+
     </script>
 </body>
+
 </html>
